@@ -5,16 +5,40 @@ require "test_db.php";
 $matrice = array_fill(0, 10, array_fill(0, 10, 0));
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+$game_id_test = 1;
+$player_id_test = 1;
+
+
+$sql = "SELECT * FROM ships WHERE game_id = ? AND player_id = ?";
+$query = $pdo->prepare($sql);
+$query->execute([$game_id_test, $player_id_test]);
+$bateaux = $query->fetchAll(PDO::FETCH_ASSOC);
+
 function placer($grille, $taille, $depart_x, $depart_y, $direction){
-    for ($i = 0; $i < $taille; $i++){
-        if ($direction == "horizontale"){
-            $grille[$depart_y][$depart_x + $i] = $taille;
-        } elseif ($direction == "verticale"){
-            $grille[$depart_y + $i][$depart_x] = $taille;
-        } else {
-            echo "Veuillez entrer une direction valide !";
-            break;
+    foreach ($bateaux as $bateau){
+        for ($i = 0; $i < $taille; $i++){
+            if ($direction == "horizontale"){
+                $grille[$depart_y][$depart_x + $i] = $taille;
+            } elseif ($direction == "verticale"){
+                $grille[$depart_y + $i][$depart_x] = $taille;
+            } else {
+                echo "Veuillez entrer une direction valide !";
+                break;
+            }
         }
+
     }
     return $grille;
 }
