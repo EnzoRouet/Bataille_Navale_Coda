@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$fichier = "etat_joueurs.json";
+$fichier = "/../data/etat_joueurs.json";
 
 if (!file_exists($fichier)) {
   file_put_contents($fichier, json_encode(["j1" => null, "j2" => null]));
