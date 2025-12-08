@@ -1,0 +1,20 @@
+Front-end :
+Bouton single player / Mulitplayer
+thème
+faire le style de la grille de matrice
+
+
+Back-end : 
+configurer la liaison php/DB
+(Potentiellement coupler JS/PHP pour les requetes on click)
+Héberger sur un serv pour le Mulitplayer
+backend structure + POO + Héritage + Polymorphisme
+gerer un synchro sleep en premier et apres essayer de faire en temps réel
+
+
+
+
+
+DB : 
+creer une db : Maria/Postgre
+mettre la matrice 
