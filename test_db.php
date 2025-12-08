@@ -1,6 +1,12 @@
 <?php
+
+$host = '127.0.0.1';
+$dbname = 'bataille_navale';
+$user = 'root';
+$pass = '1808';
+
 try {
-  $db = new PDO('mysql:host=127.0.0.1;dbname=bataille_navale;charset=utf8', 'root', '1808');
+  $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
   echo "Connexion OK";
 } catch (Exception $e) {
   die('Erreur : ' . $e->getMessage());
