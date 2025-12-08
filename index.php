@@ -1,6 +1,6 @@
 <?php
 
-require "test_db.php";
+require "/../data/test_db.php";
 
 $matrice = array_fill(0, 10, array_fill(0, 10, 0));
 
