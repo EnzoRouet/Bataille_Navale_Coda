@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="CSS/style.css">
   <title>Bataille Navale</title>
 </head>
 
@@ -21,8 +21,23 @@
       echo "<tr>";
       for ($j = 0; $j < $tailleMatrice; $j++) {
         $valeur = $matrice[$i][$j];
-        $classe = $valeur == 0 ? "vide" : "bateau";
-        echo "<td class='$classe'></td>";
+        if ($valeur === "X"){
+          $classe = "touché";
+        } elseif ($valeur === "O"){
+          $classe = "plouf";
+        } elseif ($valeur === 0){
+          $classe = "vide";
+        } else {
+          $classe = "bateau";
+        }
+
+        $attribut_js = '';
+        if ($valeur != "X" && $valeur != "O"){
+          $classe .= " clickable";
+          $attribut_js = "data-x='$j' data-y='$i' ";
+        }
+
+        echo "<td class='$classe' $attribut_js></td>";
       }
       echo "</tr>";
     }
@@ -30,4 +45,5 @@
   </table>
 </body>
 
+<script src="JS/index.js"></script>
 </html>

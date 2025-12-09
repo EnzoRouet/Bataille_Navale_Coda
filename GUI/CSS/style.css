@@ -12,10 +12,27 @@ td {
   border: 1px solid black;
 }
 
-td.vide {
+.clickable {
+  cursor: pointer;
+}
+
+.vide {
   background-color: white;
 }
 
-td.bateau {
+.bateau {
   background-color: lightblue;
+}
+
+.touché {
+  background-color: red;
+}
+
+.plouf {
+  background-color: blueviolet;
+}
+
+.touché,
+.plouf {
+  cursor: not-allowed;
 }
