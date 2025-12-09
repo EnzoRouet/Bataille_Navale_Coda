@@ -2,6 +2,8 @@ Front-end :
 Bouton single player / Mulitplayer
 thème
 affichage dynamique de la partie (point, bateaux restant, timer, bateaux couler)
+Faire système de thème à choisir
+Bouton "Annuler" à la place de reset + bouton FF avec confirmation ( en game )
 
 
 Back-end : 
@@ -14,6 +16,7 @@ faire la fonction toucher couler qui vérifie les 4 cases en croix autour si ell
 2 joueurs pour lancer
 Ne peut pas etre J1 et J2
 Gerer la fin de partie et exceptions
+Faire système de choix de taille avec mise en accord sinon -> coinflip
 
 
 
