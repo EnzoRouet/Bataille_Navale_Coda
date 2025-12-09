@@ -1,13 +1,22 @@
 <?php
 session_start();
 
-$fichier = "/../data/etat_joueurs.json";
+$fichier = "../data/etat_joueurs.json";
 
 if (!file_exists($fichier)) {
   file_put_contents($fichier, json_encode(["j1" => null, "j2" => null]));
 }
 
 $etat = json_decode(file_get_contents($fichier), true);
+
+if (isset($_SESSION["role"])) {
+  if ($_SESSION["role"] === "Joueur 1" && $etat["j1"] !== session_id()) {
+    unset($_SESSION["role"]);
+  }
+  if ($_SESSION["role"] === "Joueur 2" && $etat["j2"] !== session_id()) {
+    unset($_SESSION["role"]);
+  }
+}
 
 function save_state($file, $data)
 {
@@ -21,9 +30,24 @@ if (isset($_POST["reset_total"])) {
   session_unset();
   session_destroy();
 
-  header("Location: index.php");
+  header("Location: player.php");
   exit;
 }
+
+if (isset($_SESSION["role"])) {
+  if ($_SESSION["role"] === "Joueur 1") {
+    if (isset($_POST["joueur2"])) {
+      exit("❌ Vous êtes déjà Joueur 1 !");
+    }
+  }
+
+  if ($_SESSION["role"] === "Joueur 2") {
+    if (isset($_POST["joueur1"])) {
+      exit("❌ Vous êtes déjà Joueur 2 !");
+    }
+  }
+}
+
 
 if (isset($_POST["joueur1"])) {
   if ($etat["j1"] === null) {
@@ -38,6 +62,13 @@ if (isset($_POST["joueur2"])) {
     $etat["j2"] = session_id();
     $_SESSION["role"] = "Joueur 2";
     save_state($fichier, $etat);
+  }
+}
+
+if (isset($_SESSION["role"]) && $_SESSION["role"] !== null) {
+  if ($etat["j1"] !== null && $etat["j2"] !== null) {
+    header("Location: ../GUI/GUI_matrice.php");
+    exit;
   }
 }
 
@@ -65,18 +96,39 @@ header('refresh:5');
   </p>
 
   <form method="post">
-    <button type="submit" name="joueur1"
-      <?= $etat["j1"] !== null ? "disabled" : "" ?>>
+
+    <?php
+    $disableJ1 = "";
+    $disableJ2 = "";
+
+    if ($etat["j1"] !== null) {
+      $disableJ1 = "disabled";
+    }
+
+    if ($etat["j2"] !== null) {
+      $disableJ2 = "disabled";
+    }
+
+    if (isset($_SESSION["role"])) {
+      $disableJ1 = "disabled";
+      $disableJ2 = "disabled";
+    }
+    ?>
+
+    <button type="submit" name="joueur1" <?= $disableJ1 ?>>
       🎮 Devenir Joueur 1
     </button>
-    <button type="submit" name="joueur2"
-      <?= $etat["j2"] !== null ? "disabled" : "" ?>>
+
+    <button type="submit" name="joueur2" <?= $disableJ2 ?>>
       🎮 Devenir Joueur 2
     </button>
+
     <button type="submit" name="reset_total">
       ❌ Fin de partie (RESET)
     </button>
+
   </form>
+
 </body>
 
 </html>
