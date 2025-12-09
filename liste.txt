@@ -15,3 +15,6 @@ Faire système de choix de taille avec mise en accord sinon -> coinflip
 
 DB : 
 Railler le bateau une fois couler de la DB
+
+
+todo : En fonction de la taille de la grille rajouté un deuxième torpilleur (2 cases de long) une fois que la taille >= 15
