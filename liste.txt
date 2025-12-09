@@ -18,3 +18,17 @@ Railler le bateau une fois couler de la DB
 
 
 todo : En fonction de la taille de la grille rajouté un deuxième torpilleur (2 cases de long) une fois que la taille >= 15
+todo : faire en sorte que quand on passe le placement en verticale dans les docks les bateaux restants a placer se mettent aussi en vertical
+
+
+
+todo : (optionnel) faire en sorte que ca prenne en compte le début de bateau sur la grille et pas seulement mon curseur 
+
+Solution 1 : La méthode "Complexe" (Gérer le décalage)
+Il faudrait calculer, au moment du dragstart, où tu as cliqué dans le bateau.
+
+Exemple : J'ai cliqué à 120px du bord gauche. Comme une case fait 40px, 120 / 40 = 3. Donc j'ai attrapé le bateau à l'index 3.
+
+Ensuite, dans getCasesCibles, il faudrait faire targetX = x - index_cliqué.
+
+👉 Mon conseil : C'est une prise de tête mathématique (il faut gérer l'horizontale ET la verticale, l'offset de la souris, etc.). Pour un projet école, c'est du "nice to have" (bonus), pas de l'indispensable.

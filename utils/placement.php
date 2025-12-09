@@ -34,17 +34,17 @@ $tailleMatrice = isset($_SESSION['taille_grille']) ? $_SESSION['taille_grille'] 
 
         <div class="ship-container">
             <div>Croiser (4)</div>
-            <div class="ship size-4" draggable="true" data-size="4" data-type="battleship" id="ship-battleship">⚓</div>
+            <div class="ship size-4" draggable="true" data-size="4" data-type="battleship" id="ship-cruiser">⚓</div>
         </div>
 
         <div class="ship-container">
             <div>Sous-Marin (3)</div>
-            <div class="ship size-3" draggable="true" data-size="3" data-type="cruiser" id="ship-cruiser">⚓</div>
+            <div class="ship size-3" draggable="true" data-size="3" data-type="cruiser" id="ship-submarine_1">⚓</div>
         </div>
 
         <div class="ship-container">
             <div>Sous-Marin (3)</div>
-            <div class="ship size-3" draggable="true" data-size="3" data-type="submarine" id="ship-submarine">⚓</div>
+            <div class="ship size-3" draggable="true" data-size="3" data-type="submarine" id="ship-submarine_2">⚓</div>
         </div>
 
         <div class="ship-container">
@@ -71,7 +71,7 @@ $tailleMatrice = isset($_SESSION['taille_grille']) ? $_SESSION['taille_grille'] 
         </div>
     </div>
 
-    <script src="JS/drag_drop.js"></script>
+    <script src="../GUI/JS/drag_drop.js"></script>
 
 </body>
 </html>
