@@ -134,6 +134,27 @@ function tirer($pdo, $game_id, $player_id,$adversaire_id, $grille, $x, $y)
     return $grille;
 }
 
+function recuperer_historique_tirs($pdo,$game_id, $player_id, $grille){
+
+    $sql = "SELECT * FROM shots WHERE game_id = ? AND player_id = ?";
+    $query = $pdo->prepare($sql);
+    $query->execute([$game_id, $player_id]);
+    $shots = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($shots as $shot){
+        $shot_y = $shot["y"];
+        $shot_x = $shot["x"];
+        $result = $shot["result"];
+
+        if ($result === "hit" || $result === "sunk"){
+            $grille[$shot_y][$shot_x] = "X";
+        } elseif ($result === "miss") {
+            $grille[$shot_y][$shot_x] = "O";
+        }
+    }
+    return $grille;
+}
+
 // $adversaire_id = recuperer_id_adversaire($pdo, $game_id, $mon_id);
 // $mon_id = $_SESSION['user_id']; 
 // $game_id = $_SESSION['game_id'];
