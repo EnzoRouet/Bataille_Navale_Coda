@@ -21,7 +21,7 @@ if ($etat['j1'] === null || $etat['j2'] === null) {
 
 $tailleMatrice = (int) $etat['taille_finale'];
 
-require_once("../index.php");
+require_once("../utils/logique_partie.php");
 header('refresh:5');
 ?>
 
