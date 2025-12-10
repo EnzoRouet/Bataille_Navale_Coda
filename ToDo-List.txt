@@ -44,7 +44,6 @@ Afficher un écran "VICTOIRE" ou "DÉFAITE".
 Bouton pour retourner au menu ou "Revanche".
 
 
-
 ⚔️ Phase 3 : Le Combat (Double Grille)
 [ ] Modifier GUI_matrice.php :
 [ ] Grille Défense (Gauche) : Afficher mes bateaux + tirs reçus.
