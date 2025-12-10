@@ -4,10 +4,10 @@ require_once("../data/DB.php");
 require_once("../utils/logique_partie.php"); 
 
 
-// if (!isset($_SESSION['user_id']) || !isset($_SESSION['game_id'])) {
-//     header("Location: ../utils/player.php");
-//     exit;
-// }
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['game_id'])) {
+    header("Location: ../utils/player.php");
+    exit;
+}
 
 $game_id = $_SESSION['game_id'];
 $mon_id = $_SESSION['user_id'];
@@ -36,7 +36,7 @@ if (isset($_GET['x']) && isset($_GET['y'])) {
 }
 
 $mon_tour = false;
-if ($mon_id = $id_joueur_actif){
+if ($mon_id == $id_joueur_actif){
   $mon_tour = true;
 } else{
   $mon_tour = false;
