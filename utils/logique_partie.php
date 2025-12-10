@@ -62,7 +62,6 @@ function placer($pdo, $grille, $game_id, $player_id)
             } elseif ($direction == "verticale") {
                 $grille[$y + $i][$x] = $taille;
             } else {
-                echo "Veuillez entrer une direction valide !";
                 break;
             }
         }
@@ -95,66 +94,53 @@ function placer_epave($pdo, $grille, $game_id, $adversaire_id)
 }
 
 
-function tirer($pdo, $game_id, $player_id, $adversaire_id, $grille, $x, $y)
+function tirer($pdo, $game_id, $player_id, $adversaire_id, $x, $y)
 {
-
     $bateaux = recup($pdo, $game_id, $adversaire_id);
 
-    $resultat_env = "";
-    $message = "";
+    $resultat_env = "miss";
+    $message = "Plouf !";
 
+    foreach ($bateaux as $bateau) {
+        $bateau_x = $bateau['start_x'];
+        $bateau_y = $bateau['start_y'];
+        $size = $bateau['size'];
+        $orientation = $bateau['orientation'];
+        
+        $est_touche = false;
 
-    if ($grille[$y][$x] != 0) {
-        $grille[$y][$x] = "X";
-        $resultat_env = "hit";
-        $message = "Touché !";
-
-        foreach ($bateaux as $bateau) {
-            $bateau_x = $bateau['start_x'];
-            $bateau_y = $bateau['start_y'];
-            $size = $bateau['size'];
-            $orientation = $bateau['orientation'];
-            $touche_trouve = false;
-
-
-            if ($orientation == "horizontale") {
-
-                if ($y == $bateau_y && $x >= $bateau_x && $x < ($bateau_x + $size)) {
-                    $touche_trouve = true;
-                }
-            } elseif ($orientation == "verticale") {
-
-                if ($x == $bateau_x && $y >= $bateau_y && $y < ($bateau_y + $size)) {
-                    $touche_trouve = true;
-                }
+        if ($orientation == "H") { 
+            if ($y == $bateau_y && $x >= $bateau_x && $x < ($bateau_x + $size)) {
+                $est_touche = true;
             }
-
-
-            if ($touche_trouve) {
-                $nouveaux_hits = $bateau['hits'] + 1;
-
-
-                $upd = $pdo->prepare("UPDATE ships SET hits = ? WHERE id = ?");
-                $upd->execute([$nouveaux_hits, $bateau['id']]);
-
-
-                if ($nouveaux_hits >= $size) {
-                    $message = "COULÉ !!!";
-                }
-                break;
+        } elseif ($orientation == "V") { 
+            if ($x == $bateau_x && $y >= $bateau_y && $y < ($bateau_y + $size)) {
+                $est_touche = true;
             }
         }
-    } else {
-        $grille[$y][$x] = "O";
-        $resultat_env = "miss";
-        $message = "Plouf !";
+
+        if ($est_touche) {
+            $resultat_env = "hit";
+            $message = "Touché !";
+
+            $nouveaux_hits = $bateau['hits'] + 1;
+            
+            $upd = $pdo->prepare("UPDATE ships SET hits = ? WHERE id = ?");
+            $upd->execute([$nouveaux_hits, $bateau['id']]);
+
+            if ($nouveaux_hits == $size) {
+                $message = "COULÉ !!!";
+            }
+            
+            break; 
+        }
     }
 
     $sql = "INSERT INTO shots (game_id, player_id, x, y, result) VALUES (?, ?, ?, ?, ?)";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$game_id, $player_id, $x, $y, $resultat_env]);
 
-    return $message; // MODIFIÉ: Retourne le message au lieu de l'afficher
+    return $message;
 }
 
 function recuperer_historique_tirs($pdo, $game_id, $player_id, $grille)
@@ -179,38 +165,38 @@ function recuperer_historique_tirs($pdo, $game_id, $player_id, $grille)
     return $grille;
 }
 
-function obtenir_matrices_combat($pdo, $game_id, $mon_id, $adversaire_id, $tailleMatrice)
-{
-    $grille_defense = creerMatrice($tailleMatrice);
-    $grille_attaque = creerMatrice($tailleMatrice);
+// function obtenir_matrices_combat($pdo, $game_id, $mon_id, $adversaire_id, $tailleMatrice)
+// {
+//     $grille_defense = creerMatrice($tailleMatrice);
+//     $grille_attaque = creerMatrice($tailleMatrice);
 
-    $grille_defense = placer($pdo, $grille_defense, $game_id, $mon_id);
+//     $grille_defense = placer($pdo, $grille_defense, $game_id, $mon_id);
 
-    $grille_defense = recuperer_historique_tirs($pdo, $game_id, $adversaire_id, $grille_defense);
+//     $grille_defense = recuperer_historique_tirs($pdo, $game_id, $adversaire_id, $grille_defense);
 
-    $grille_attaque = recuperer_historique_tirs($pdo, $game_id, $mon_id, $grille_attaque);
+//     $grille_attaque = recuperer_historique_tirs($pdo, $game_id, $mon_id, $grille_attaque);
 
-    $grille_attaque = placer_epave($pdo, $grille_attaque, $game_id, $adversaire_id);
+//     $grille_attaque = placer_epave($pdo, $grille_attaque, $game_id, $adversaire_id);
 
 
-    return [
-        'defense' => $grille_defense,
-        'attaque' => $grille_attaque
-    ];
-}
+//     return [
+//         'defense' => $grille_defense,
+//         'attaque' => $grille_attaque
+//     ];
+// }
 
-function obtenir_tour_actuel($pdo, $game_id)
-{
-    $sql = "SELECT current_turn FROM games WHERE id = ?";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$game_id]);
+// function obtenir_tour_actuel($pdo, $game_id)
+// {
+//     $sql = "SELECT current_turn FROM games WHERE id = ?";
+//     $stmt = $pdo->prepare($sql);
+//     $stmt->execute([$game_id]);
 
-    return $stmt->fetchColumn();
-}
+//     return $stmt->fetchColumn();
+// }
 
-function changer_tour($pdo, $game_id, $nouveau_joueur_id)
-{
-    $sql = "UPDATE games SET current_turn = ? WHERE id = ?";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$nouveau_joueur_id, $game_id]);
-}
+// function changer_tour($pdo, $game_id, $nouveau_joueur_id)
+// {
+//     $sql = "UPDATE games SET current_turn = ? WHERE id = ?";
+//     $stmt = $pdo->prepare($sql);
+//     $stmt->execute([$nouveau_joueur_id, $game_id]);
+// }
