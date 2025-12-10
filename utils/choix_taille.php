@@ -46,6 +46,9 @@ if ($etat["taille_finale"] !== null) {
         $_SESSION['user_id'] = $player_data['id'];
         $_SESSION['taille_grille'] = $game_data['board_size'];
 
+        $role = ($current_session_id === $etat["j1_session_id"]) ? 'Joueur 1' : 'Joueur 2';
+        $_SESSION['role'] = $role;
+
         header("Location: placement.php");
         exit;
       }
@@ -117,7 +120,6 @@ if (is_numeric($etat["j1"]) && is_numeric($etat["j2"]) && $etat["taille_finale"]
   $stmt = $pdo->prepare("INSERT INTO games (board_size, status) VALUES (?, 'placement')");
   $stmt->execute([$taille_choisi]);
   $game_id = $pdo->lastInsertId();
-  $_SESSION['game_id'] = $game_id;
 
   $stmt = $pdo->prepare("INSERT INTO players (session_id, game_id, player_number) VALUES (?, ?, 1)");
   $stmt->execute([$etat["j1_session_id"], $game_id]);
@@ -130,8 +132,17 @@ if (is_numeric($etat["j1"]) && is_numeric($etat["j2"]) && $etat["taille_finale"]
   $stmt = $pdo->prepare("UPDATE games SET player1_id = ?, player2_id = ? WHERE id = ?");
   $stmt->execute([$p1_id, $p2_id, $game_id]);
 
-  $current_player_id = ($_SESSION['role'] === 'Joueur 1') ? $p1_id : $p2_id;
-  $_SESSION['user_id'] = $current_player_id;
+  $current_session_id = session_id();
+
+  if ($current_session_id === $etat["j1_session_id"]) {
+    $_SESSION['user_id'] = $p1_id;
+    $_SESSION['role'] = 'Joueur 1';
+  } elseif ($current_session_id === $etat["j2_session_id"]) {
+    $_SESSION['user_id'] = $p2_id;
+    $_SESSION['role'] = 'Joueur 2';
+  }
+
+  $_SESSION['game_id'] = $game_id;
   $_SESSION['taille_grille'] = $taille_choisi;
 
   header("Location: placement.php");
