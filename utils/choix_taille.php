@@ -151,6 +151,7 @@ if (is_numeric($etat["j1"]) && is_numeric($etat["j2"]) && $etat["taille_finale"]
 
 header('refresh:5');
 
+$role = $_SESSION["role"] ?? "Non défini";
 ?>
 
 <!DOCTYPE html>
@@ -158,30 +159,58 @@ header('refresh:5');
 
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="../GUI/CSS/style.css">
   <title>Choix taille</title>
 </head>
 
-<body>
-  <h1>Bonjour <?= $_SESSION["role"] ?></h1>
+<body class="classic-theme">
 
-  <form method="post">
-    <label>Proposez la taille de la grille (pair entre 10 et 20) :</label>
-    <input type="number" name="taille" min="10" max="20" step="2" required>
-    <button type="submit">Proposer</button>
-  </form>
+  <div class="game-lobby">
+    <div class="player-info">
+      <h1>Bonjour <?= $role ?></h1>
+      <?php if (!is_numeric($etat["j1"]) || !is_numeric($etat["j2"])): ?>
+        <p class="waiting-indicator">En attente de l'autre joueur...</p>
+      <?php endif; ?>
+    </div>
 
-  <p>
-    Joueur 1 : <?= (is_numeric($etat["j1"]) ? $etat["j1"] : "En attente") ?><br>
-    Joueur 2 : <?= (is_numeric($etat["j2"]) ? $etat["j2"] : "En attente") ?>
-  </p>
+    <form method="post" class="size-form">
+      <label for="taille">Proposez la taille de la grille (pair entre 10 et 20) :</label>
+      <input type="number" name="taille" id="taille" min="10" max="20" step="2" required value="<?= $etat[$_SESSION["role"] === 'Joueur 1' ? 'j1' : 'j2'] ?>">
+      <button type="submit" class="btn-proposer" <?= is_numeric($etat[$_SESSION["role"] === 'Joueur 1' ? 'j1' : 'j2']) ? 'disabled' : '' ?>>Proposer</button>
+      <?php if (isset($error)): ?>
+        <p class="error-message"><?= $error ?></p>
+      <?php endif; ?>
+    </form>
 
-  <div>
-    <a href="reset.php">
-      <button>
-        ANNULER LA PARTIE (Debug)
-      </button>
-    </a>
+    <div class="status-propositions">
+      <h2>Propositions:</h2>
+      <p>
+        Joueur 1 :
+        <span class="<?= (is_numeric($etat["j1"]) ? 'proposed' : 'waiting') ?>">
+          <?= (is_numeric($etat["j1"]) ? $etat["j1"] : "En attente") ?>
+        </span>
+      </p>
+      <p>
+        Joueur 2 :
+        <span class="<?= (is_numeric($etat["j2"]) ? 'proposed' : 'waiting') ?>">
+          <?= (is_numeric($etat["j2"]) ? $etat["j2"] : "En attente") ?>
+        </span>
+      </p>
+    </div>
+
   </div>
+
+  <a href="reset.php" class="btn-debug-reset">
+    ANNULER LA PARTIE (Debug)
+  </a>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('gameTheme') || 'classic';
+      document.body.className = '';
+      document.body.classList.add(savedTheme + '-theme');
+    });
+  </script>
 </body>
 
 </html>

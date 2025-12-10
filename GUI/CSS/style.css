@@ -1,3 +1,131 @@
+:root {
+  --font-family-base: "Arial", sans-serif;
+  --color-background: #e8e8e8;
+  --color-text: #333;
+  --color-primary: #007bff;
+  --color-accent: #ffc107;
+  --color-button-bg: #007bff;
+  --color-button-text: white;
+  --color-status-ok: #28a745;
+  --color-status-wait: #6c757d;
+  --color-grille-vide: white;
+  --color-grille-bateau: lightblue;
+  --color-grille-touche: red;
+  --color-grille-plouf: blueviolet;
+  --grille-border: 1px solid black;
+}
+
+body {
+  font-family: var(--font-family-base);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  transition: background-color 0.5s, color 0.5s;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+h1,
+h2 {
+  color: var(--color-primary);
+  text-align: center;
+}
+
+.main-menu-container,
+.game-lobby {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 450px;
+  margin-bottom: 20px;
+}
+
+button,
+.btn-start,
+.btn-proposer,
+.btn-debug-reset {
+  background-color: var(--color-button-bg);
+  color: var(--color-button-text);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s, transform 0.1s;
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  text-decoration: none;
+  text-align: center;
+}
+
+button:hover:not([disabled]),
+.btn-start:hover,
+.btn-proposer:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #dc3545;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.theme-selector {
+  margin-bottom: 20px;
+  text-align: center;
+}
+#theme-select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid var(--color-primary);
+}
+
+.status-propositions {
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px solid #ccc;
+}
+.status-propositions span {
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 5px;
+  display: inline-block;
+}
+.proposed {
+  background-color: var(--color-status-ok);
+  color: white;
+}
+.waiting {
+  background-color: var(--color-status-wait);
+  color: white;
+}
+.waiting-indicator {
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
 table {
   margin-left: auto;
   margin-right: auto;
@@ -9,7 +137,7 @@ td {
   width: 40px;
   height: 40px;
   text-align: center;
-  border: 1px solid black;
+  border: var(--grille-border);
 }
 
 .clickable {
@@ -17,22 +145,80 @@ td {
 }
 
 .vide {
-  background-color: white;
+  background-color: var(--color-grille-vide);
 }
 
 .bateau {
-  background-color: lightblue;
+  background-color: var(--color-grille-bateau);
 }
 
 .touché {
-  background-color: red;
+  background-color: var(--color-grille-touche);
 }
 
 .plouf {
-  background-color: blueviolet;
+  background-color: var(--color-grille-plouf);
 }
 
 .touché,
 .plouf {
   cursor: not-allowed;
+}
+
+.starwars-theme {
+  --font-family-base: "Consolas", monospace;
+  --color-background: #000000;
+  --color-text: #ffeb3b;
+  --color-primary: #00bfff;
+  --color-accent: #ff4500;
+  --color-button-bg: #00bfff;
+  --color-button-text: black;
+  --color-status-ok: #00bfff;
+  --color-status-wait: #555;
+  --color-grille-vide: #0a0a0a;
+  --color-grille-bateau: #34495e;
+  --color-grille-touche: #ff0000;
+  --color-grille-plouf: #004a77;
+  --grille-border: 1px solid #00bfff;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100"><circle cx="10" cy="10" r="1" fill="white"/><circle cx="50" cy="70" r="0.5" fill="white"/><circle cx="90" cy="30" r="1.5" fill="white"/><circle cx="30" cy="45" r="0.7" fill="white"/></svg>');
+}
+.starwars-theme .main-menu-container,
+.starwars-theme .game-lobby {
+  background: rgba(10, 10, 10, 0.8);
+  border: 1px solid var(--color-primary);
+  box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+  color: var(--color-text);
+}
+.starwars-theme h1,
+.starwars-theme h2 {
+  text-shadow: 0 0 5px var(--color-primary);
+}
+
+.apoc-theme {
+  --font-family-base: "Impact", "Georgia", serif;
+  --color-background: #5d4037;
+  --color-text: #ffcc80;
+  --color-primary: #d32f2f;
+  --color-accent: #ff5722;
+  --color-button-bg: #4e342e;
+  --color-button-text: var(--color-text);
+  --color-status-ok: #ff5722;
+  --color-status-wait: #a1887f;
+  --color-grille-vide: #795548;
+  --color-grille-bateau: #9e9d24;
+  --color-grille-touche: #d32f2f;
+  --color-grille-plouf: #3e2723;
+  --grille-border: 2px dashed var(--color-accent);
+  background-image: linear-gradient(to top, #4e342e, #6d4c41);
+}
+.apoc-theme .main-menu-container,
+.apoc-theme .game-lobby {
+  background: #795548;
+  border: 3px solid var(--color-primary);
+  box-shadow: 5px 5px 0px var(--color-accent);
+}
+.apoc-theme button,
+.apoc-theme .btn-debug-reset {
+  border: 1px solid var(--color-accent);
+  text-transform: uppercase;
 }
