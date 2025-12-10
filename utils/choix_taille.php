@@ -129,8 +129,8 @@ if (is_numeric($etat["j1"]) && is_numeric($etat["j2"]) && $etat["taille_finale"]
   $stmt->execute([$etat["j2_session_id"], $game_id]);
   $p2_id = $pdo->lastInsertId();
 
-  $stmt = $pdo->prepare("UPDATE games SET player1_id = ?, player2_id = ? WHERE id = ?");
-  $stmt->execute([$p1_id, $p2_id, $game_id]);
+  $stmt = $pdo->prepare("UPDATE games SET player1_id = ?, player2_id = ?, current_player = ? WHERE id = ?");
+  $stmt->execute([$p1_id, $p2_id, $p1_id, $game_id]);
 
   $current_session_id = session_id();
 

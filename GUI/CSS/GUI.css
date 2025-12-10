@@ -1,0 +1,29 @@
+h1 {
+  text-align: center;
+  color: white;
+}
+
+/* ############# IMPORTANT ############ */
+.game-container {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  padding: 20px;
+}
+.board-title {
+  text-align: center;
+  color: white;
+  margin-bottom: 10px;
+}
+.board-defense table {
+  border: 4px solid #4caf50;
+}
+.board-attack table {
+  border: 4px solid #f44336;
+}
+/* ############           ############ */
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
