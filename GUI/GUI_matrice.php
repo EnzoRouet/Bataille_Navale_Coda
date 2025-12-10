@@ -14,6 +14,15 @@ $mon_id = $_SESSION['user_id'];
 $adversaire_id = recuperer_id_adversaire($pdo, $game_id, $mon_id);
 $tailleMatrice = $_SESSION['taille_grille'];
 
+$stmt = $pdo->prepare("SELECT status FROM games WHERE id = ?");
+$stmt->execute([$game_id]);
+$etat_partie = $stmt->fetchColumn();
+
+if ($etat_partie === 'finished') {
+    header("Location: ../utils/partie_terminée.php");
+    exit;
+}
+
 $stmt = $pdo->prepare("SELECT current_player FROM games WHERE id = ?");
 $stmt->execute([$game_id]);
 $id_joueur_actif = $stmt->fetchColumn();

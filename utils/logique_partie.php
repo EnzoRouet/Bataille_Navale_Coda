@@ -140,6 +140,19 @@ function tirer($pdo, $game_id, $player_id, $adversaire_id, $x, $y)
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$game_id, $player_id, $x, $y, $resultat_env]);
 
+    $sql_surv = "SELECT COUNT(*) FROM ships WHERE game_id = ? AND player_id = ? AND hits < size";
+    $stmt_surv = $pdo->prepare($sql_surv);
+    $stmt_surv->execute([$game_id, $adversaire_id]);
+    $nb_survivants = $stmt_surv->fetchColumn();
+
+    if ($nb_survivants == 0){
+        $sql_win = "UPDATE games SET status = 'finished', winner_id = ? WHERE id = ?";
+        $stmt_win = $pdo->prepare($sql_win);
+        $stmt_win->execute([$player_id, $game_id]);
+
+        $message = "VICTOIRE !!!!!!";
+    }
+
     return $message;
 }
 
