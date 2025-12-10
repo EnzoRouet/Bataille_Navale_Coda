@@ -132,7 +132,7 @@ cells.forEach((cell) => {
       const shipElement = document.getElementById(draggedShipId);
       if (shipElement) {
         shipElement.style.display = "none";
-        shipElement.draggable = false; // Sécurité
+        shipElement.draggable = false;
       }
 
       if (placedShips.length === 5) {
