@@ -1,4 +1,5 @@
 const cases_libres = document.querySelectorAll(".clickable");
+cases_libres.classList;
 
 cases_libres.forEach((case_libre) => {
   case_libre.addEventListener("click", (e) => {

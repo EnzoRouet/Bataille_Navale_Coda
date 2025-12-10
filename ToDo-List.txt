@@ -10,28 +10,6 @@ Récupérer les vrais ID (1, 2, 15...) générés par SQL.
 Les stocker dans $_SESSION ($_SESSION['user_id'], $_SESSION['game_id']).
 Rediriger vers placement.php (et non plus directement vers la grille de combat).
 
-Étape 2 : L'Interface de Placement (Frontend)
-C'est la page qui n'existe pas encore. Elle doit permettre au joueur de préparer sa stratégie.
-Fichier à créer : placement.php.
-
-À faire :
-
-Créer une zone HTML "Dock" (à gauche) avec 5 div représentant tes bateaux (Porte-avions, Croiseur, etc.).
-Afficher une grille vide (à droite) via ta fonction creerMatrice et une boucle PHP simple.
-Ajouter un bouton "Pivoter" (Vertical/Horizontal).
-Ajouter un bouton "Valider" (grisé tant que tous les bateaux ne sont pas posés).
-
-Étape 3 : La Mécanique Drag & Drop (JavaScript)
-C'est le moteur du placement. PHP ne peut pas le faire, c'est 100% JS.
-Fichier à créer : JS/drag_drop.js.
-
-À faire :
-
-Rendre les bateaux du dock "draggable".
-Détecter le survol de la grille : calculer si le bateau rentre (ne dépasse pas, ne chevauche pas).
-Gérer le "lâcher" (Drop) : colorier les cases en gris/vert et enregistrer les coordonnées en mémoire JS (tableau JSON).
-Activer le bouton "Valider" quand les 5 bateaux sont placés.
-
 Étape 4 : La Sauvegarde de la Flotte (Backend)
 Une fois que le joueur clique sur "Valider", il faut envoyer ses choix à la base de données.
 Fichier à créer : data/save_placement.php.
@@ -75,19 +53,6 @@ Bouton pour retourner au menu ou "Revanche".
 [ ] Créer la partie dans la table games.
 [ ] Stocker les vrais ID (SQL) en $_SESSION.
 [ ] Rediriger vers placement.php (au lieu de la grille).
-
-⚓ Phase 2 : Placement des Navires (Drag & Drop)
-[ ] Créer placement.php (Vue) :
-[ ] HTML : Zone "Dock" (5 bateaux) + Zone "Grille vide".
-[ ] HTML : Boutons "Pivoter" et "Valider".
-[ ] Créer JS/drag_drop.js (Logique) :
-[ ] Rendre les éléments déplaçables.
-[ ] Gérer le dépôt sur la grille (vérifier que ça ne dépasse pas).
-[ ] Stocker la position des bateaux dans un tableau JS.
-[ ] Créer data/save_placement.php (Sauvegarde) :
-[ ] Recevoir le JSON du JS.
-[ ] Faire les INSERT INTO ships dans la BDD.
-[ ] Rediriger vers le combat (GUI_matrice.php).
 
 ⚔️ Phase 3 : Le Combat (Double Grille)
 [ ] Modifier GUI_matrice.php :

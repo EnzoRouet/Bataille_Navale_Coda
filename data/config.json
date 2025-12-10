@@ -1,7 +1,5 @@
 {
-    "j1": 10,
-    "j2": 10,
-    "j1_session_id": "5bf9920ff402539919d952c961db6b6a",
-    "j2_session_id": "c65c28a2191f08b11fa4140a91eae4ea",
-    "taille_finale": 10
+    "j1": null,
+    "j2": null,
+    "taille_finale": null
 }
