@@ -43,29 +43,6 @@ if ($game_players['player1_id'] == $joueur_actuel_id) {
   $current_player_number = 2;
 }
 
-if (isset($_GET['x']) && isset($_GET['y'])) {
-  $x = (int)$_GET['x'];
-  $y = (int)$_GET['y'];
-
-  $tour_actuel_id = obtenir_tour_actuel($pdo, $game_id);
-  if ($tour_actuel_id == $joueur_actuel_id) {
-
-    $grille_temp = creerMatrice($tailleMatrice);
-
-    $message_tir = tirer($pdo, $game_id, $joueur_actuel_id, $joueur_adversaire_id, $grille_temp, $x, $y);
-
-    changer_tour($pdo, $game_id, $joueur_adversaire_id);
-
-    $_SESSION['message_tir'] = $message_tir;
-    header('Location: GUI_matrice.php');
-    exit;
-  } else {
-    $_SESSION['message_tir'] = "Erreur: Ce n'est pas votre tour !";
-    header('Location: GUI_matrice.php');
-    exit;
-  }
-}
-
 $matrices = obtenir_matrices_combat($pdo, $game_id, $joueur_actuel_id, $joueur_adversaire_id, $tailleMatrice);
 
 $matrice_defense = $matrices['defense'];
@@ -78,11 +55,6 @@ if (!$est_mon_tour) {
   header('refresh:5');
 }
 
-$message_display = '';
-if (isset($_SESSION['message_tir'])) {
-  $message_display = $_SESSION['message_tir'];
-  unset($_SESSION['message_tir']);
-}
 ?>
 
 
@@ -97,12 +69,6 @@ if (isset($_SESSION['message_tir'])) {
 </head>
 
 <body>
-  <?php if ($message_display) : ?>
-    <div class="message-tir">
-      <h2><?= htmlspecialchars($message_display) ?></h2>
-    </div>
-  <?php endif; ?>
-
   <h1>Phase de Combat - Votre Tour : <?= $est_mon_tour ? 'OUI' : 'NON (Rafraîchissement dans 5s)' ?></h1>
 
   <div class="grilles-container">
@@ -155,7 +121,7 @@ if (isset($_SESSION['message_tir'])) {
 
             if ($valeur === 0 && $est_mon_tour) {
               $classe .= " clickable";
-              $attribut_js = "data-x='$j' data-y='$i'"; // Simplifié pour JS basique
+              $attribut_js = "data-x='$j' data-y='$i' data-cible-id='$joueur_adversaire_id'";
             }
 
             echo "<td class='$classe' $attribut_js></td>";
