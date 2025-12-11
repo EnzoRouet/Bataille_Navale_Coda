@@ -39,44 +39,15 @@ if ($est_vainqueur) {
 <head>
     <meta charset="UTF-8">
     <title>Fin de partie</title>
-    <link rel="stylesheet" href="../GUI/CSS/partie_terminée.css" >
+    <link rel="stylesheet" href="../GUI/CSS/partie_terminée.css">
     <style>
         h1 {
             color: <?= $couleur ?>;
         }
 
-<<<<<<< HEAD
-        h1 {
-            font-size: 4em;
-            margin-bottom: 10px;
-            color: <?= $couleur ?>;
-        }
-
-        p {
-            font-size: 1.5em;
-            margin-bottom: 30px;
-        }
-
-        img {
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            margin-bottom: 30px;
-            max-width: 400px;
-        }
-
-=======
->>>>>>> c23613d8c9d3ad690059bb56edfbdee96d9953b7
         button {
             background-color: <?= $couleur ?>;
         }
-<<<<<<< HEAD
-
-        button:hover {
-            transform: scale(1.05);
-            filter: brightness(1.1);
-        }
-=======
->>>>>>> c23613d8c9d3ad690059bb56edfbdee96d9953b7
     </style>
 </head>
 
