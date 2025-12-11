@@ -5,23 +5,23 @@ $tailleMatrice = $_SESSION['taille_grille'];
 $largeurCarrier = ($tailleMatrice == 20) ? 2 : 1;
 $totalBateaux = 5;
 
-if ($tailleMatrice >= 12){
+if ($tailleMatrice >= 12) {
     $totalBateaux++;
 }
-if ($tailleMatrice >= 14){
+if ($tailleMatrice >= 14) {
     $totalBateaux++;
 }
-if ($tailleMatrice >= 16){
+if ($tailleMatrice >= 16) {
     $totalBateaux++;
 }
-if ($tailleMatrice >= 18){
+if ($tailleMatrice >= 18) {
     $totalBateaux++;
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
-    
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,8 +64,8 @@ if ($tailleMatrice >= 18){
             <div class="ship size-4" draggable="true" data-width="1" data-size="4" data-type="battleship" id="ship-cruiser_1">⚓</div>
         </div>
 
-        <?php 
-            if ($tailleMatrice >= 16): ?>
+        <?php
+        if ($tailleMatrice >= 16): ?>
             <div class="ship-container">
                 <div>Sous-Marin (3)</div>
                 <div class="ship size-3" draggable="true" data-width="1" data-size="3" data-type="submarine" id="ship-submarine_3">⚓</div>
