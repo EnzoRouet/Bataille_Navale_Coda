@@ -32,12 +32,8 @@ if ($tailleMatrice >= 18) {
 <body>
     <style>
         .grid-container {
-            display: grid;
             grid-template-columns: repeat(<?= $tailleMatrice ?>, 40px);
             grid-template-rows: repeat(<?= $tailleMatrice ?>, 40px);
-            gap: 1px;
-            background-color: #333;
-            border: 5px solid #333;
         }
     </style>
 

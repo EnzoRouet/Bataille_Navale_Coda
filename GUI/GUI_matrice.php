@@ -156,7 +156,7 @@ header('refresh:3');
     <p><strong>Total des tirs :</strong> <?= $total_tirs ?></p>
     <p><strong class="ratio-precision">Précision :</strong> <?= $ratio_formatte ?> %</p>
   </div>
-  <form method="post" id="abandonForm" action="../utils/abandon.php" style="text-align:center; margin-top:20px;">
+  <form method="post" id="abandonForm" action="../utils/abandon.php">
     <button type="button" onclick="confirmAbandon()">❌ Abandonner la partie</button>
   </form>
 
