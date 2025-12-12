@@ -21,6 +21,8 @@ h1 {
 p {
   font-size: 1.5em;
   margin-bottom: 30px;
+  text-align: center;
+  align-self: center;
 }
 img {
   border-radius: 10px;
@@ -66,9 +68,6 @@ button:hover {
 .score-board-container p {
   font-size: 1.1em;
   margin: 10px 0;
-}
-
-.score-board-container strong {
   font-weight: bold;
 }
 

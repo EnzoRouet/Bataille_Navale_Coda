@@ -184,14 +184,14 @@ btnRotate.addEventListener("click", () => {
 });
 
 btnValider.addEventListener("click", () => {
-  const dataToSend = JSON.stringify({ ships: placedShips });
+  const data = JSON.stringify({ ships: placedShips });
 
   fetch("../data/save_placement.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: dataToSend,
+    body: data,
   })
     .then((response) => response.json())
     .then((data) => {

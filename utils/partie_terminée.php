@@ -88,10 +88,10 @@ if ($abandon_partie) {
 
     <div class="score-board-container">
         <h2>🎯 Votre Performance</h2>
-        <p><strong>Tirs réussis (Touches) :</strong> <?= $mes_hits ?></p>
-        <p><strong>Tirs ratés (Ploufs) :</strong> <?= $mes_misses ?></p>
-        <p><strong>Total des tirs :</strong> <?= $total_tirs ?></p>
-        <p><strong class="ratio-precision">Précision :</strong> <?= $ratio_formatte ?> %</p>
+        <p>Tirs réussis (Touches) : <?= $mes_hits ?></p>
+        <p>Tirs ratés (Ploufs) : <?= $mes_misses ?></p>
+        <p>Total des tirs : <?= $total_tirs ?></p>
+        <p class="ratio-precision">Précision : <?= $ratio_formatte ?> %</p>
     </div>
 
     <form action="reset_fin_partie.php" method="post">
