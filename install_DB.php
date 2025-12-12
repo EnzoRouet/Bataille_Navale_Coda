@@ -103,7 +103,7 @@ try {
 
 <body>
     <div class="container">
-        <div class="header">⚓ Installation Base de Données</div>
+        <div class="header">⚓️ Installation Base de Données</div>
 
         <ul class="message-list">
             <?php foreach ($messages as $index => $message): ?>
