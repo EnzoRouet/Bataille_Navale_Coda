@@ -1,52 +1,67 @@
-# 🕹️ Project: Coda (Real-Time Game Engine)
+# Web Battleship
 
-### 👥 Collaboration
-Ce projet est le fruit d'un travail collaboratif intensif entre **Enzo** et **[@kenzotrindade](https://github.com/kenzotrindade)**.  
-La synergie de notre équipe a permis de coupler une logique backend robuste à une interface utilisateur fluide.
+Un jeu de stratégie navale multijoueur en temps réel développé avec une architecture PHP native.
+
+## 🛠️ Stack Technique
+
+* **Frontend :** JavaScript Vanilla (ES6+), Fetch API, Manipulation du DOM
+* **Backend :** PHP 8.x (Architecture MVC, POO)
+* **Base de données :** MariaDB (SQL) via PDO
+* **Serveur :** Nginx / Apache
+
+## 📋 Prérequis
+
+* PHP 8.0 ou supérieur
+* MariaDB 10.x ou supérieur
+* Un serveur web local (WAMP, XAMPP, MAMP, ou Docker)
+
+## ⚙️ Installation
+
+1.  **Cloner le dépôt**
+    ```bash
+    git clone [https://github.com/ton-pseudo/web-battleship.git](https://github.com/ton-pseudo/web-battleship.git)
+    cd web-battleship
+    ```
+
+2.  **Configuration**
+    Copiez le fichier d'exemple de configuration et renseignez vos accès BDD.
+    ```bash
+    cp config/db.example.php config/db.php
+    ```
+    *(Éditez `config/db.php` avec vos identifiants MariaDB : host, user, password)*
+
+3.  **Initialisation de la Base de Données**
+    Ce projet intègre un script d'installation automatique qui génère les tables nécessaires.
+    
+    Lancez votre serveur local et accédez à l'URL d'installation :
+    > `http://localhost/web-battleship/data/install.php`
+    *(⚠️ Adaptez ce chemin selon la structure de vos dossiers)*
+
+    Une fois le message de succès affiché, la base de données est prête.
+
+4.  **Lancer le jeu**
+    Redirigez-vous vers l'accueil :
+    > `http://localhost/web-battleship/`
+
+## 🏗️ Architecture & API
+
+### Communication Client-Serveur
+L'application utilise une stratégie de **Polling** (requêtes périodiques) pour simuler le temps réel sans rechargement de page.
+
+| Méthode | Fichier (Endpoint) | Description |
+| :--- | :--- | :--- |
+| `POST` | `/data/save_placement.php` | Valide les coordonnées des bateaux et les enregistre en BDD. |
+| `GET` | `/data/get_state.php` | Récupère l'état actuel de la partie (tour du joueur, tirs, grilles). |
+| `POST` | `/data/fire.php` | Traite la logique de tir et met à jour la matrice de jeu. |
+
+### Gestion des Données
+* **Parties (Games) :** Stockées avec des états (`WAITING`, `IN_PROGRESS`, `FINISHED`) pour gérer le matchmaking simple.
+* **Mouvements (Moves) :** Chaque tir est enregistré individuellement pour éviter les doublons et permettre l'historique.
+
+## 👥 Contributeurs
+
+* **Enzo** - *Développeur Full Stack* - [Github](https://github.com/ton-profil)
+* **@kenzotrindade** - *Co-développeur* - [Github](https://github.com/kenzotrindade)
 
 ---
-
-## 📝 Présentation du Projet
-**Coda** est une application web de jeu multijoueur local conçue pour démontrer la gestion d'états asynchrones en PHP. 
-
-L'objectif était de créer une expérience utilisateur sans couture où le passage de la phase de préparation (sélection des joueurs) à la phase de gameplay (plateau) se fait de manière totalement automatique et dynamique.
-
-### Points Clés :
-* **Architecture Event-Driven (Simulée) :** Utilisation d'un bus de données JSON pour synchroniser l'état des joueurs sans base de données lourde.
-* **Logique de Routage Dynamique :** Moteur de rendu conditionnel qui injecte les composants (`plateau` vs `selection`) selon le contexte de la session.
-
----
-
-## 🛠️ Défis Techniques & Apprentissages
-
-Au cours du développement, nous avons été confrontés à des problématiques réelles de production que nous avons résolues avec succès :
-
-### 1. Synchronisation de l'État (Race Conditions)
-**Défi :** Comment s'assurer que deux joueurs se connectant simultanément ne corrompent pas l'état global ?  
-**Solution :** Mise en place d'une structure de données persistante en JSON avec vérifications d'intégrité à chaque cycle d'exécution, garantissant que la partie ne commence que si $j1$ ET $j2$ sont instanciés.
-
-### 2. Gestion du Cycle de Vie HTTP (The Loop Challenge)
-**Défi :** Gérer le rafraîchissement automatique de l'interface sans créer de boucles de redirection infinies (Erreurs HTTP 310).  
-**Solution :** Implémentation d'un système de **Polling Conditionnel**. Le script analyse l'état du serveur avant de décider s'il doit ordonner au client de se rafraîchir, optimisant ainsi la stabilité du navigateur.
-### 3. Stack Environnementale (DevOps)
-**Défi :** Configurer un environnement **Nginx / PHP-FPM** sur Ubuntu pour gérer les communications via Sockets Unix.  
-**Solution :** Maîtrise de la configuration des blocs `location` et gestion fine des permissions système (`www-data`) pour permettre l'écriture sécurisée des données de jeu.
-
----
-
-## 🚀 Stack Technique
-* **Backend :** PHP 8.x (Session management, JSON parsing)
-* **Frontend :** Architecture modulaire (Inclusion de composants dynamiques)
-* **Serveur :** Nginx, PHP-FPM sur Ubuntu
-* **Data :** JSON Persistence
-
----
-
-## 📈 Évolutions Possibles
-* Migration vers **WebSockets** (Ratchet PHP) pour supprimer le polling et passer sur du temps réel pur.
-* Implémentation d'un système de **Matchmaking** via une base de données relationnelle.
-
----
-
-**Envie d'en savoir plus sur notre méthodologie de travail ?** N'hésitez pas à nous contacter ou à consulter nos autres dépôts.
-
+*Projet développé dans le cadre du Bachelor Full Stack à l'école Coda.*
