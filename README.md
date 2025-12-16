@@ -1,3 +1,0 @@
-﻿# Bataille_Navale_Coda
-
-Projet Académique collaboratif avec @kenzotrindade.
