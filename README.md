@@ -31,8 +31,7 @@ Un jeu de stratégie navale multijoueur en temps réel développé avec une arch
     
     Lancez votre serveur local et accédez à l'URL d'installation.
     Par exemple :
-    > `http://localhost/bataille_navale/data/installation.php`
-    *(⚠️ Vérifiez le nom exact de votre fichier d'installation dans le dossier data)*
+    > `http://localhost/bataille_navale/data/install_DB.php`
 
     Une fois le message de succès affiché, la base de données est prête.
 
@@ -48,8 +47,8 @@ L'application utilise une stratégie de **Polling** (requêtes périodiques) via
 | Méthode | Fichier (Endpoint) | Description |
 | :--- | :--- | :--- |
 | `POST` | `/data/save_placement.php` | Valide les coordonnées des bateaux et les enregistre en BDD. |
-| `GET` | `/data/etat.php` | *(Nom à vérifier)* Récupère l'état actuel de la partie (tour, tirs). |
-| `POST` | `/data/tir.php` | *(Nom à vérifier)* Traite la logique de tir et met à jour la matrice. |
+| `GET` | `/data/etat.php` | Récupère l'état actuel de la partie (tour, tirs). |
+| `POST` | `/data/tir.php` | Traite la logique de tir et met à jour la matrice. |
 
 ### Gestion des Données
 * **Parties :** Stockées avec des états pour gérer le matchmaking.
@@ -62,3 +61,4 @@ L'application utilise une stratégie de **Polling** (requêtes périodiques) via
 
 ---
 *Projet développé dans le cadre du Bachelor Full Stack à l'école Coda.*
+
