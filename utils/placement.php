@@ -2,25 +2,26 @@
 session_start();
 $tailleMatrice = $_SESSION['taille_grille'];
 
+$largeurCarrier = ($tailleMatrice == 20) ? 2 : 1;
 $totalBateaux = 5;
 
-if ($tailleMatrice >= 12){
+if ($tailleMatrice >= 12) {
     $totalBateaux++;
 }
-if ($tailleMatrice >= 14){
+if ($tailleMatrice >= 14) {
     $totalBateaux++;
 }
-if ($tailleMatrice >= 16){
+if ($tailleMatrice >= 16) {
     $totalBateaux++;
 }
-if ($tailleMatrice >= 18){
+if ($tailleMatrice >= 18) {
     $totalBateaux++;
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
-    
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,12 +32,8 @@ if ($tailleMatrice >= 18){
 <body>
     <style>
         .grid-container {
-            display: grid;
             grid-template-columns: repeat(<?= $tailleMatrice ?>, 40px);
             grid-template-rows: repeat(<?= $tailleMatrice ?>, 40px);
-            gap: 1px;
-            background-color: #333;
-            border: 5px solid #333;
         }
     </style>
 
@@ -46,45 +43,46 @@ if ($tailleMatrice >= 18){
 
         <div class="ship-container">
             <div>Porte-Avions (5)</div>
-            <div class="ship size-5" draggable="true" data-size="5" data-type="carrier" id="ship-carrier">⚓</div>
+            <div class="ship size-5" draggable="true" data-width="<?= $largeurCarrier ?>" data-size="5" data-type="carrier" id="ship-carrier"
+            style="<?= ($largeurCarrier == 2) ? 'height: 80px; line-height: 80px;' : '' ?>"> ⚓ </div>
         </div>
 
         <?php 
             if ($tailleMatrice >= 18): ?>
                 <div class="ship-container">
                     <div>Croiser (4)</div>
-                    <div class="ship size-4" draggable="true" data-size="4" data-type="battleship" id="ship-cruiser_2">⚓</div>
+                    <div class="ship size-4" draggable="true" data-width="1" data-size="4" data-type="battleship" id="ship-cruiser_2">⚓</div>
                 </div>
         <?php endif; ?>
 
         <div class="ship-container">
             <div>Croiser (4)</div>
-            <div class="ship size-4" draggable="true" data-size="4" data-type="battleship" id="ship-cruiser_1">⚓</div>
+            <div class="ship size-4" draggable="true" data-width="1" data-size="4" data-type="battleship" id="ship-cruiser_1">⚓</div>
         </div>
 
-        <?php 
-            if ($tailleMatrice >= 16): ?>
+        <?php
+        if ($tailleMatrice >= 16): ?>
             <div class="ship-container">
                 <div>Sous-Marin (3)</div>
-                <div class="ship size-3" draggable="true" data-size="3" data-type="submarine" id="ship-submarine_3">⚓</div>
+                <div class="ship size-3" draggable="true" data-width="1" data-size="3" data-type="submarine" id="ship-submarine_3">⚓</div>
             </div>
         <?php endif; ?>
 
         <div class="ship-container">
             <div>Sous-Marin (3)</div>
-            <div class="ship size-3" draggable="true" data-size="3" data-type="submarine" id="ship-submarine_2">⚓</div>
+            <div class="ship size-3" draggable="true" data-width="1" data-size="3" data-type="submarine" id="ship-submarine_2">⚓</div>
         </div>
 
         <div class="ship-container">
             <div>Sous-Marin (3)</div>
-            <div class="ship size-3" draggable="true" data-size="3" data-type="submarine" id="ship-submarine_1">⚓</div>
+            <div class="ship size-3" draggable="true" data-width="1" data-size="3" data-type="submarine" id="ship-submarine_1">⚓</div>
         </div>
 
         <?php
             if ($tailleMatrice >= 14): ?> 
                 <div class="ship-container">
                     <div>Torpilleur (2)</div>
-                    <div class="ship size-2" draggable="true" data-size="2" data-type="destroyer" id="ship-destroyer_3">⚓</div>
+                    <div class="ship size-2" draggable="true" data-width="1" data-size="2" data-type="destroyer" id="ship-destroyer_3">⚓</div>
                 </div>
         <?php endif; ?>
 
@@ -93,14 +91,14 @@ if ($tailleMatrice >= 18){
             if ($tailleMatrice >= 12): ?> 
                 <div class="ship-container">
                     <div>Torpilleur (2)</div>
-                    <div class="ship size-2" draggable="true" data-size="2" data-type="destroyer" id="ship-destroyer_2">⚓</div>
+                    <div class="ship size-2" draggable="true" data-width="1" data-size="2" data-type="destroyer" id="ship-destroyer_2">⚓</div>
                 </div>
         <?php endif; ?>
 
 
         <div class="ship-container">
             <div>Torpilleur (2)</div>
-            <div class="ship size-2" draggable="true" data-size="2" data-type="destroyer" id="ship-destroyer_1">⚓</div>
+            <div class="ship size-2" draggable="true" data-width="1" data-size="2" data-type="destroyer" id="ship-destroyer_1">⚓</div>
         </div>
 
         <div class="controls">
