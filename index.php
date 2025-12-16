@@ -11,7 +11,7 @@
       const savedTheme = localStorage.getItem('gameTheme') || 'classic';
       document.body.className = savedTheme + '-theme';
     })();
-  </script>
+  </script> 
 </head>
 
 <body>
