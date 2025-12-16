@@ -1,7 +1,7 @@
 # 🕹️ Project: Coda (Real-Time Game Engine)
 
 ### 👥 Collaboration
-Ce projet est le fruit d'un travail collaboratif intensif entre **[Enzo]** et **[@kenzotrindade](https://github.com/kenzotrindade)**.  
+Ce projet est le fruit d'un travail collaboratif intensif entre **Enzo** et **[@kenzotrindade](https://github.com/kenzotrindade)**.  
 La synergie de notre équipe a permis de coupler une logique backend robuste à une interface utilisateur fluide.
 
 ---
@@ -49,3 +49,4 @@ Au cours du développement, nous avons été confrontés à des problématiques 
 ---
 
 **Envie d'en savoir plus sur notre méthodologie de travail ?** N'hésitez pas à nous contacter ou à consulter nos autres dépôts.
+
