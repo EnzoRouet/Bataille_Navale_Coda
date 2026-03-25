@@ -56,7 +56,7 @@ L'application utilise une stratégie de **Polling** (requêtes périodiques) via
 
 ## 👥 Contributeurs
 
-* **Enzo** - *Développeur Full Stack* - [Github](https://github.com/ton-profil)
+* **Enzo** - *Développeur Full Stack* - [Github](https://github.com/enzorouet)
 * **@kenzotrindade** - *Co-développeur* - [Github](https://github.com/kenzotrindade)
 
 ---
